@@ -12,11 +12,11 @@ export function VendorList() {
     const navigate = useNavigate();
 
     const user = JSON.parse(localStorage.getItem('google_user') || '{}');
-
+    const URL = "https://vendor-management-gh2p.onrender.com";
 
     useEffect(() => {
         setLoading(true);
-        axios.get('http://localhost:5000/api/vendors')
+        axios.get(`${URL}/api/vendors`)
             .then(res => setVendors(res.data.vendors || []))
             .finally(() => setLoading(false));
     }, []);
@@ -42,7 +42,7 @@ export function VendorList() {
             return;
         }
         if (window.confirm('Are you sure you want to delete this vendor?')) {
-            await axios.delete(`http://localhost:5000/api/vendors/${id}`, {
+            await axios.delete(`${URL}/api/vendors/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setVendors(vendors.filter(v => v._id !== id));
