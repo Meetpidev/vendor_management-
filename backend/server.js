@@ -43,7 +43,7 @@ app.use(express.json());
 dotenv.config();
 
 app.use('/test', (req, res) => {
-  res.send("It's working);
+  res.send("It's working");
 });
 
 // Create Vendor
