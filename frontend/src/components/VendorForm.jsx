@@ -21,11 +21,12 @@ export function VendorForm() {
 
   const token = localStorage.getItem('google_token');
   const config = { headers: { Authorization: `Bearer ${token}` } };
+  const URL = "https://vendor-management-gh2p.onrender.com";
 
   useEffect(() => {
     if (id) {
       setIsLoading(true);
-      axios.get(`http://localhost:5000/api/vendors/${id}`, config)
+      axios.get(`${URL}/api/vendors/${id}`, config)
         .then(res => setForm(res.data))
         .finally(() => setIsLoading(false));
     }
@@ -58,9 +59,9 @@ export function VendorForm() {
     setIsLoading(true);
     try {
       if (id) {
-        await axios.put(`http://localhost:5000/api/vendors/${id}`, form, config);
+        await axios.put(`${URL}/api/vendors/${id}`, form, config);
       } else {
-        await axios.post('http://localhost:5000/api/vendors', form, config);
+        await axios.post(`${URL}/api/vendors`, form, config);
       }
       navigate('/');
     } finally {
