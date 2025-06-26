@@ -42,6 +42,10 @@ app.use(cors());
 app.use(express.json());
 dotenv.config();
 
+app.use('/test', (req, res) => {
+  res.send("It's working);
+});
+
 // Create Vendor
 app.post('/api/vendors',googleAuthMiddleware, async (req, res) => {
    const vendorData = { ...req.body, creatorEmail: req.user.email };
