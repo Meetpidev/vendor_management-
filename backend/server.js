@@ -56,11 +56,14 @@ app.post('/api/vendors',googleAuthMiddleware, async (req, res) => {
 
 // Get Paginated Vendors
 app.get('/api/vendors', async (req, res) => {
-  const { page = 1, limit = 5 } = req.query;
-  const vendors = await Vendor.find()
-    .skip((page - 1) * limit)
-    .limit(Number(limit));
-  const total = await Vendor.countDocuments();
+  const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 6;
+
+    const vendors = await Vendor.find()
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    const total = await Vendor.countDocuments();
   res.send({ vendors, total });
 });
 
